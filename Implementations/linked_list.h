@@ -7,3 +7,4 @@ typedef struct _list_node {
 PListNode ListNew();
 void ListPushBack(PListNode l, void *data, int data_size);
 void ListForEach(PListNode l, void(*callback)(PListNode));
+void *ListPopBack(PListNode l);

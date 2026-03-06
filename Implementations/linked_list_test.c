@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "linked_list.h"
+#include <stdlib.h>
 
 void list_printer(PListNode node) {
-	printf("%d ", *(int*)node->Data);
+	if(node->Data) printf("%d ", *(int*)(node->Data)); //Btw head node's data is empty
 }
 
 int main() {
@@ -17,7 +18,8 @@ int main() {
 	ListPushBack(list, (void*)&d, sizeof(int));
 	d = 5;
 	ListPushBack(list, (void*)&d, sizeof(int));
-	
+	free(ListPopBack(list));
+
 	ListForEach(list, list_printer); 
 
 	return 0;

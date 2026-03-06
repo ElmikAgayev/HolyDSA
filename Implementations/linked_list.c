@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include "linked_list.h"
 #include <string.h>
 #include <stdio.h>
+#include "linked_list.h"
 
 PListNode ListNew() {
 	PListNode l = (PListNode)calloc(sizeof(ListNode), 1);
@@ -18,12 +18,20 @@ void ListPushBack(PListNode l, void *data, int data_size) {
 	
 	while(l->Next != l) l = l->Next;
 
-	l->Next = n; 
+	l->Next = n;
+}
+
+void *ListPopBack(PListNode l) {
+	if(l->Next == l) return 0;
+	while(l->Next != l->Next->Next) l = l->Next;
+	void *d = l->Next->Data;
+	l->Next = l;
+	return d;
 }
 
 void ListForEach(PListNode l, void(*callback)(PListNode)) {
-	do {
+	while(l->Next != l) {
 		callback(l);
 		l = l->Next;
-	} while(l->Next != l);
+	} callback(l); // last element
 }
